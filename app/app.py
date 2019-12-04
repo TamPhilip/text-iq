@@ -40,15 +40,27 @@ def get():
     return json.dumps({"items" : items},cls=ObjectEncoder, indent=2)
 
 
-@app.route('/create/', methods=['GET', 'PUT', 'POST'])
+@app.route('/create/', methods=['PUT', 'POST'])
 def create():
+    """
+        Creates the item with the correct name items json
+        If not found returns items json
+        @:item name query request
+        :return:
+        """
     name = request.args.get('item')
     item = ItemObject(name)
     items.append(item)
     return json.dumps({"items" : items}, cls=ObjectEncoder, indent=2)
 
-@app.route('/delete/', methods=['GET', 'POST'])
+@app.route('/delete/', methods=['GET', 'DELETE'])
 def delete():
+    """
+    Finds the first item in items and deletes it and returns items json
+    If not found returns items json
+    @:item name query request
+    :return:
+    """
     name = request.args.get('item')
     for item in items:
         if(item.name == name):
