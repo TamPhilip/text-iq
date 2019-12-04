@@ -47,7 +47,7 @@ def create():
     items.append(item)
     return json.dumps({"items" : items}, cls=ObjectEncoder, indent=2)
 
-@app.route('/delete/g', methods=['GET', 'POST'])
+@app.route('/delete/', methods=['GET', 'POST'])
 def delete():
     name = request.args.get('item')
     for item in items:
